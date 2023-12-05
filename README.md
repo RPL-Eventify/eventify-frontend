@@ -28,10 +28,10 @@ npm run dev
 <Nama_Component>.requireAuth = true;
 ```
 
-> Bisa liat contoh di folder `src/pages/test/protected.js`
+> Bisa liat contoh di folder [/src/pages/test/protected.js](./src/pages/test/protected.js)
 
 2. Simpan semua URL Path yang diperlukan pada `src\routes\paths.js`
-3. Uncomment style berikut untuk membantuk debugging
+3. Uncomment CSS rule berikut untuk membantu debugging
 
 ```css
 /* For Debugging */
