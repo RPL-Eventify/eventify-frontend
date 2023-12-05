@@ -39,3 +39,7 @@ npm run dev
     border: 1px solid red;
 }
 ```
+
+4. Bisa manfaatin component library FlowBite untuk React.
+
+:link: <https://www.flowbite-react.com/>
