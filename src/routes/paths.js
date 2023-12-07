@@ -5,6 +5,7 @@ const PATH = {
   logout: `${baseURL}/api/v1/user/logout/`,
   currentUser: `${baseURL}/api/v1/user/`,
   refreshToken: `${baseURL}/api/v1/token/refresh/`,
+  register: `${baseURL}/api/v1/user/register/`,
 };
 
 export default PATH;
