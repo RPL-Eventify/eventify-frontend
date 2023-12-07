@@ -1,40 +1,28 @@
 import { useState } from 'react';
-//import Button from '../elements/button';
 import axios from 'axios';
 import PATH from '@/routes/paths';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuthContext } from '@/contexts/AuthContext';
 import { useRouter } from 'next/router';
-import {
-  Button,
-  FloatingLabel,
-  Checkbox,
-  Label,
-  TextInput,
-} from 'flowbite-react';
+import { Button, Label, TextInput } from 'flowbite-react';
 import { HiMail } from 'react-icons/hi';
 
 export default function RegisterForm() {
-  const [formData, setFormData] = useState({
-    first_name: '',
-    last_name: '',
+  const [data, setData] = useState({
     email: '',
     password: '',
-    confirm_password: '',
+    nama_depan: '',
+    nama_belakang: '',
   });
 
   const [isLoading, setLoading] = useState(false);
   const { saveTokens } = useAuthContext();
   const router = useRouter();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+  function handleChange(target) {
+    setData({ ...data, [target.id]: target.value });
+  }
 
   async function handleRegister() {
     if (isLoading === true) {
@@ -43,7 +31,7 @@ export default function RegisterForm() {
     setLoading(true);
 
     try {
-      const response = await axios.post(PATH.register, formData);
+      const response = await axios.post(PATH.register, data);
       setLoading(false);
 
       // Notify success
@@ -65,11 +53,10 @@ export default function RegisterForm() {
 
       // Clear form after submission if needed
       setFormData({
-        first_name: '',
-        last_name: '',
         email: '',
         password: '',
-        confirm_password: '',
+        nama_depan: '',
+        nama_belakang: '',
       });
     } catch (error) {
       const errors = error.response.data.errors;
@@ -101,27 +88,27 @@ export default function RegisterForm() {
         <div>
           <div className="mb-4 block">
             <div className="mb-2 block">
-              <Label htmlFor="first_name" value="Your First Name" />
+              <Label htmlFor="nama_depan" value="Your First Name" />
             </div>
             <TextInput
-              id="first_name"
+              id="nama_depan"
               type="text"
-              name="first_name"
-              value={formData.first_name}
-              onChange={handleChange}
+              name="nama_depan"
+              //value={formData.nama_depan}
+              onChange={(e) => handleChange(e.target)}
               required
             />
           </div>
           <div className="mb-4 block">
             <div className="mb-2 block">
-              <Label htmlFor="last_name" value="Your Last Name" />
+              <Label htmlFor="nama_belakang" value="Your Last Name" />
             </div>
             <TextInput
-              id="last_name"
+              id="nama_belakang"
               type="text"
-              name="last_name"
-              value={formData.last_name}
-              onChange={handleChange}
+              name="nama_belakang"
+              //value={formData.nama_belakang}
+              onChange={(e) => handleChange(e.target)}
               required
             />
           </div>
@@ -135,8 +122,8 @@ export default function RegisterForm() {
               icon={HiMail}
               placeholder="name@mail.com"
               name="email"
-              value={formData.email}
-              onChange={handleChange}
+              //value={formData.email}
+              onChange={(e) => handleChange(e.target)}
               required
             />
           </div>
@@ -148,21 +135,8 @@ export default function RegisterForm() {
               id="password"
               type="password"
               name="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="mb-4 block">
-            <div className="mb-2 block">
-              <Label htmlFor="confirm_password" value="Confirm password" />
-            </div>
-            <TextInput
-              id="confirm_password"
-              type="password"
-              name="confirm_password"
-              value={formData.confirm_password}
-              onChange={handleChange}
+              //value={formData.password}
+              onChange={(e) => handleChange(e.target)}
               required
             />
           </div>
