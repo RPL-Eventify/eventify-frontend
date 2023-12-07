@@ -6,9 +6,14 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuthContext } from '@/contexts/AuthContext';
 import { useRouter } from 'next/router';
-import { Button, FloatingLabel, Checkbox, Label, TextInput } from 'flowbite-react';
+import {
+  Button,
+  FloatingLabel,
+  Checkbox,
+  Label,
+  TextInput,
+} from 'flowbite-react';
 import { HiMail } from 'react-icons/hi';
-
 
 export default function RegisterForm() {
   const [formData, setFormData] = useState({
@@ -89,7 +94,7 @@ export default function RegisterForm() {
   return (
     <>
       <ToastContainer />
-      <form className="flex h-full max-h-screen w-full max-w-screen-sm gap-5 flex-col justify-around rounded-xl p-4">
+      <form className="flex h-full max-h-screen w-full max-w-screen-sm flex-col justify-around gap-5 rounded-xl p-4">
         <h1 className="text-x text-center text-xl font-bold">
           Registration Form
         </h1>
@@ -98,67 +103,71 @@ export default function RegisterForm() {
             <div className="mb-2 block">
               <Label htmlFor="first_name" value="Your First Name" />
             </div>
-            <TextInput 
-              id="first_name" 
-              type="text" 
+            <TextInput
+              id="first_name"
+              type="text"
               name="first_name"
               value={formData.first_name}
               onChange={handleChange}
-              required />
+              required
+            />
           </div>
           <div className="mb-4 block">
             <div className="mb-2 block">
               <Label htmlFor="last_name" value="Your Last Name" />
             </div>
-            <TextInput 
-              id="last_name" 
-              type="text" 
+            <TextInput
+              id="last_name"
+              type="text"
               name="last_name"
               value={formData.last_name}
               onChange={handleChange}
-              required />
+              required
+            />
           </div>
           <div className="mb-4 block">
-              <div className="mb-2 block">
-                <Label htmlFor="email" value="Your email" />
-              </div>
-              <TextInput 
-                id="email" 
-                type="email" 
-                icon={HiMail} 
-                placeholder="name@mail.com" 
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required 
-              />
+            <div className="mb-2 block">
+              <Label htmlFor="email" value="Your email" />
+            </div>
+            <TextInput
+              id="email"
+              type="email"
+              icon={HiMail}
+              placeholder="name@mail.com"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
           </div>
           <div className="mb-4 block">
             <div className="mb-2 block">
               <Label htmlFor="password" value="Your password" />
             </div>
-            <TextInput 
-              id="password" 
-              type="password" 
+            <TextInput
+              id="password"
+              type="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
-              required />
+              required
+            />
           </div>
           <div className="mb-4 block">
             <div className="mb-2 block">
               <Label htmlFor="confirm_password" value="Confirm password" />
             </div>
-            <TextInput 
-              id="confirm_password" 
-              type="password" 
+            <TextInput
+              id="confirm_password"
+              type="password"
               name="confirm_password"
               value={formData.confirm_password}
               onChange={handleChange}
-              required />
+              required
+            />
           </div>
         </div>
-        <div className="flex justify-center place-content-center ">
+        <div className="flex place-content-center justify-center ">
           <Button onClick={handleRegister}>Register</Button>
         </div>
       </form>
