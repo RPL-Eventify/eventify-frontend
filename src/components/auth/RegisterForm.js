@@ -3,7 +3,6 @@ import axios from 'axios';
 import PATH from '@/routes/paths';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useAuthContext } from '@/contexts/AuthContext';
 import { useRouter } from 'next/router';
 import { Button, Label, TextInput } from 'flowbite-react';
 import { HiMail } from 'react-icons/hi';
@@ -17,7 +16,6 @@ export default function RegisterForm() {
   });
 
   const [isLoading, setLoading] = useState(false);
-  const { saveTokens } = useAuthContext();
   const router = useRouter();
 
   function handleChange(target) {
@@ -46,10 +44,7 @@ export default function RegisterForm() {
         theme: 'colored',
       });
 
-      saveTokens(response.data.refresh, response.data.access);
-      setTimeout(() => {
-        router.push('/');
-      }, 2000);
+      router.push('/auth/login');
 
       // Clear form after submission if needed
       setFormData({
@@ -59,22 +54,29 @@ export default function RegisterForm() {
         nama_belakang: '',
       });
     } catch (error) {
-      const errors = error.response.data.errors;
       setLoading(false);
 
-      // Notify error
-      errors.forEach((error) => {
-        toast.error(error.detail, {
-          position: 'top-right',
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: false,
-          progress: undefined,
-          theme: 'colored',
+      // Check if error.response exists before accessing its properties
+      if (error.response?.value) {
+        const errors = error.response.data.errors;
+        // Notify error
+        errors.forEach((err) => {
+          toast.error(err.detail, {
+            position: 'top-right',
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
+            theme: 'colored',
+          });
         });
-      });
+      } else {
+        // If error.response is undefined or has unexpected structure
+        console.error('An unexpected error occurred:', error);
+        // You can add a general error message/notification here
+      }
     }
   }
 
@@ -83,7 +85,7 @@ export default function RegisterForm() {
       <ToastContainer />
       <form className="flex h-full max-h-screen w-full max-w-screen-sm flex-col justify-around gap-5 rounded-xl p-4">
         <h1 className="text-x text-center text-xl font-bold">
-          Registration Form
+          Register Account
         </h1>
         <div>
           <div className="mb-4 block">
@@ -94,7 +96,6 @@ export default function RegisterForm() {
               id="nama_depan"
               type="text"
               name="nama_depan"
-              //value={formData.nama_depan}
               onChange={(e) => handleChange(e.target)}
               required
             />
@@ -107,7 +108,6 @@ export default function RegisterForm() {
               id="nama_belakang"
               type="text"
               name="nama_belakang"
-              //value={formData.nama_belakang}
               onChange={(e) => handleChange(e.target)}
               required
             />
@@ -122,7 +122,6 @@ export default function RegisterForm() {
               icon={HiMail}
               placeholder="name@mail.com"
               name="email"
-              //value={formData.email}
               onChange={(e) => handleChange(e.target)}
               required
             />
@@ -135,7 +134,6 @@ export default function RegisterForm() {
               id="password"
               type="password"
               name="password"
-              //value={formData.password}
               onChange={(e) => handleChange(e.target)}
               required
             />
