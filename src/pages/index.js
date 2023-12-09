@@ -1,17 +1,12 @@
-import { ToastContainer } from 'react-toastify';
-import { Row, Col } from 'flowbite';
-import 'react-toastify/dist/ReactToastify.css';
+import Layout from '@/components/layout';
+import HomePage from '@/components/HomePage';
 
 export default function Home() {
   return (
-    <>
-      <h1 className="font-bold">Hello world!</h1>
-      <div>
-        <h2>About Your Web App</h2>
-        <p>Insert information about your web app here...</p>
-        <h2>Features</h2>
-        <p>Highlight the key features of your web app...</p>
+    <Layout>
+      <div className="flex flex-1 content-center justify-center">
+        <HomePage />
       </div>
-    </>
+    </Layout>
   );
 }
