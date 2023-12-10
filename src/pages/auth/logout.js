@@ -25,5 +25,9 @@ export default function Logout() {
     }, 2000);
   }, [tokens, router, setUser, setTokens]);
 
-  return <h1>Logout</h1>;
+  return (
+    <div className="flex h-full items-center justify-center text-3xl font-bold">
+      Logout successful! You will be redirected to the homepage
+    </div>
+  );
 }
