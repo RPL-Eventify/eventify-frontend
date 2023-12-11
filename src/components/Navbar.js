@@ -53,16 +53,16 @@ export default function NavbarComponent() {
               <Navbar.Link href="/" active={isActive('/')}>
                 Home
               </Navbar.Link>
-              <Navbar.Link href="#" active={isActive('/projects')}>
+              <Navbar.Link href="/event/projects" active={isActive('/projects')}>
                 Projects
               </Navbar.Link>
-              <Navbar.Link href="#" active={isActive('/areas')}>
+              <Navbar.Link href="/event/areas" active={isActive('/areas')}>
                 Areas
               </Navbar.Link>
-              <Navbar.Link href="#" active={isActive('/resources')}>
+              <Navbar.Link href="/event/resources" active={isActive('/resources')}>
                 Resources
               </Navbar.Link>
-              <Navbar.Link href="#" active={isActive('/archives')}>
+              <Navbar.Link href="/archive/archived" active={isActive('/archives')}>
                 Archives
               </Navbar.Link>
               <Navbar.Link href="/about" active={isActive('/about')}>

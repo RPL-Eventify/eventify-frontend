@@ -97,7 +97,7 @@ const ActivityForm = () => {
     <>
     <ToastContainer />
     <form className="flex max-w-md flex-col gap-4" onSubmit={(e) => {handleSubmit(e)}}>
-      <h1 className="text-x text-center text-xl font-bold">Add Event  </h1>
+      <h1 className="text-x text-center text-xl font-bold">Add Activity  </h1>
       <div>
         <div className="mb-2 block">
           <Label htmlFor="base" value="Judul" />
