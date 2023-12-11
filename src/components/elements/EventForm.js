@@ -93,22 +93,56 @@ const EventForm = () => {
 
   return (
     <>
-      <ToastContainer />
-      <form
-        className="flex max-w-md flex-col gap-4"
-        onSubmit={(e) => {
-          handleSubmit(e);
-        }}
-      >
-        <h1 className="text-x text-center text-xl font-bold">Add Event </h1>
-        <div>
-          <div className="mb-2 block">
-            <Label htmlFor="base" value="Judul" />
-          </div>
-          <TextInput
-            type="base"
-            id="judul"
-            className="w-full"
+    <ToastContainer />
+    <form className="flex max-w-md flex-col gap-4" onSubmit={(e) => {handleSubmit(e)}}>
+      <h1 className="text-x text-center text-xl font-bold">Add Event  </h1>
+      <div>
+        <div className="mb-2 block">
+          <Label htmlFor="base" value="Judul" />
+        </div>
+        <TextInput
+          type="base"
+          id="judul"
+          className="w-full"
+          onChange={(e) => onFormChange(e.target)}
+          disabled={isLoading}
+          required
+        />
+      </div>
+      <div>
+        <div className="mb-2 block">
+          <Label htmlFor="comment" value="Deskripsi" />
+        </div>
+        <Textarea
+          type="comment"
+          id="deskripsi"
+          className="w-full"
+          onChange={(e) => onFormChange(e.target)}
+          disabled={isLoading}
+          placeholder="Deskripsi"
+        />
+      </div>
+      <div>
+        <div className="mb-2 block">
+          <Label htmlFor="base" value="Lokasi" />
+        </div>
+        <TextInput
+          type="base"
+          id="lokasi"
+          className="w-full"
+          onChange={(e) => onFormChange(e.target)}
+          disabled={isLoading}
+        />
+      </div>
+      <div className="flex items-center">
+        <div className="relative">
+          <Label value='Waktu Mulai'/>
+          <input
+            type="datetime-local"
+            id="waktu_mulai"
+            name="waktu_mulai"
+            min="2015-06-07T00:00"
+            max="2030-06-07T00:00" 
             onChange={(e) => onFormChange(e.target)}
             disabled={isLoading}
             required
@@ -185,10 +219,18 @@ const EventForm = () => {
             required
           />
         </div>
-        <Button type="submit" disabled={isLoading} isProcessing={isLoading}>
-          Add
-        </Button>
-      </form>
+        <input
+          type="datetime-local"
+          id="waktu_pengingat"
+          name="waktu_pengingat"
+          min="2015-06-07T00:00"
+          max="2030-06-07T00:00" 
+          onChange={(e) => onFormChange(e.target)}
+          disabled={isLoading}
+        />
+      </div>
+      <Button type="submit" disabled={isLoading} isProcessing={isLoading}>Add</Button>
+    </form>
     </>
   );
 };
