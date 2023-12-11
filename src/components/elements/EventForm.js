@@ -10,7 +10,7 @@ import { Button, TextInput, Label, Textarea } from 'flowbite-react';
 const EventForm = () => {
   const router = useRouter();
   const { pathname } = router;
-  const { tokens } = useAuthContext()
+  const { tokens } = useAuthContext();
   const category = pathname.split('/').pop();
   const [eventData, setEventData] = useState({
     kategori: category,
@@ -49,28 +49,25 @@ const EventForm = () => {
     setLoading(true);
 
     try {
-      console.log(eventData)
+      console.log(eventData);
       const response = await axios.post(PATH.createEvent, eventData, {
         headers: {
           Authorization: `Bearer ${tokens?.access}`,
-        }
+        },
       });
       setLoading(false);
 
       // Notify success
-      toast.success(
-        'Success!',
-        {
-          position: 'top-right',
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: false,
-          progress: undefined,
-          theme: 'colored',
-        },
-      );
+      toast.success('Success!', {
+        position: 'top-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: 'colored',
+      });
       setTimeout(() => {
         router.reload();
       }, 3000);
@@ -96,95 +93,102 @@ const EventForm = () => {
 
   return (
     <>
-    <ToastContainer />
-    <form className="flex max-w-md flex-col gap-4" onSubmit={(e) => {handleSubmit(e)}}>
-      <h1 className="text-x text-center text-xl font-bold">Add Event  </h1>
-      <div>
-        <div className="mb-2 block">
-          <Label htmlFor="base" value="Judul" />
-        </div>
-        <TextInput
-          type="base"
-          id="judul"
-          className="w-full"
-          onChange={(e) => onFormChange(e.target)}
-          disabled={isLoading}
-          required
-        />
-      </div>
-      <div>
-        <div className="mb-2 block">
-          <Label htmlFor="comment" value="Deskripsi" />
-        </div>
-        <Textarea
-          type="comment"
-          id="deskripsi"
-          className="w-full"
-          onChange={(e) => onFormChange(e.target)}
-          disabled={isLoading}
-          required
-          placeholder="Deskripsi"
-        />
-      </div>
-      <div>
-        <div className="mb-2 block">
-          <Label htmlFor="base" value="Lokasi" />
-        </div>
-        <TextInput
-          type="base"
-          id="lokasi"
-          className="w-full"
-          onChange={(e) => onFormChange(e.target)}
-          disabled={isLoading}
-          required
-        />
-      </div>
-      <div className="flex items-center">
-        <div className="relative">
-          <Label value='Waktu Mulai'/>
-          <input
-            type="datetime-local"
-            id="waktu_mulai"
-            name="waktu_mulai"
-            min="2015-06-07T00:00"
-            max="2030-06-07T00:00" 
+      <ToastContainer />
+      <form
+        className="flex max-w-md flex-col gap-4"
+        onSubmit={(e) => {
+          handleSubmit(e);
+        }}
+      >
+        <h1 className="text-x text-center text-xl font-bold">Add Event </h1>
+        <div>
+          <div className="mb-2 block">
+            <Label htmlFor="base" value="Judul" />
+          </div>
+          <TextInput
+            type="base"
+            id="judul"
+            className="w-full"
             onChange={(e) => onFormChange(e.target)}
             disabled={isLoading}
             required
-            />
+          />
         </div>
-        <span className="mx-4 text-gray-500"/>
-        <div className="relative">
-        <Label value='Waktu Akhir'/>
-          <input
-            type="datetime-local"
-            id="waktu_akhir"
-            name="waktu_akhir"
-            min="2015-06-07T00:00"
-            max="2030-06-07T00:00" 
+        <div>
+          <div className="mb-2 block">
+            <Label htmlFor="comment" value="Deskripsi" />
+          </div>
+          <Textarea
+            type="comment"
+            id="deskripsi"
+            className="w-full"
             onChange={(e) => onFormChange(e.target)}
             disabled={isLoading}
             required
+            placeholder="Deskripsi"
+          />
+        </div>
+        <div>
+          <div className="mb-2 block">
+            <Label htmlFor="base" value="Lokasi" />
+          </div>
+          <TextInput
+            type="base"
+            id="lokasi"
+            className="w-full"
+            onChange={(e) => onFormChange(e.target)}
+            disabled={isLoading}
+            required
+          />
+        </div>
+        <div className="flex items-center">
+          <div className="relative">
+            <Label value="Waktu Mulai" />
+            <input
+              type="datetime-local"
+              id="waktu_mulai"
+              name="waktu_mulai"
+              min="2015-06-07T00:00"
+              max="2030-06-07T00:00"
+              onChange={(e) => onFormChange(e.target)}
+              disabled={isLoading}
+              required
             />
+          </div>
+          <span className="mx-4 text-gray-500" />
+          <div className="relative">
+            <Label value="Waktu Akhir" />
+            <input
+              type="datetime-local"
+              id="waktu_akhir"
+              name="waktu_akhir"
+              min="2015-06-07T00:00"
+              max="2030-06-07T00:00"
+              onChange={(e) => onFormChange(e.target)}
+              disabled={isLoading}
+              required
+            />
+          </div>
         </div>
-      </div>
-      <div>
-        <div className="mb-2 block">
-          <Label htmlFor="base" value="Waktu Pengingat" />
+        <div>
+          <div className="mb-2 block">
+            <Label htmlFor="base" value="Waktu Pengingat" />
+          </div>
+          <input
+            type="datetime-local"
+            id="waktu_pengingat"
+            name="waktu_pengingat"
+            min="2015-06-07T00:00"
+            max="2030-06-07T00:00"
+            onChange={(e) => onFormChange(e.target)}
+            disabled={isLoading}
+            required
+          />
         </div>
-        <input
-          type="datetime-local"
-          id="waktu_pengingat"
-          name="waktu_pengingat"
-          min="2015-06-07T00:00"
-          max="2030-06-07T00:00" 
-          onChange={(e) => onFormChange(e.target)}
-          disabled={isLoading}
-          required
-        />
-      </div>
-      <Button type="submit" disabled={isLoading} isProcessing={isLoading}>Add</Button>
-    </form>
+        <Button type="submit" disabled={isLoading} isProcessing={isLoading}>
+          Add
+        </Button>
+      </form>
     </>
   );
 };

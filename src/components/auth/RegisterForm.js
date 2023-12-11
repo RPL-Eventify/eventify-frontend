@@ -44,7 +44,9 @@ export default function RegisterForm() {
         theme: 'colored',
       });
 
-      router.push('/auth/login');
+      setTimeout(() => {
+        router.push('/');
+      }, 3000);
 
       // Clear form after submission if needed
       setFormData({
@@ -54,29 +56,22 @@ export default function RegisterForm() {
         nama_belakang: '',
       });
     } catch (error) {
+      const errors = error.response.data.errors;
       setLoading(false);
 
-      // Check if error.response exists before accessing its properties
-      if (error.response?.value) {
-        const errors = error.response.data.errors;
-        // Notify error
-        errors.forEach((err) => {
-          toast.error(err.detail, {
-            position: 'top-right',
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: false,
-            pauseOnHover: true,
-            draggable: false,
-            progress: undefined,
-            theme: 'colored',
-          });
+      // Notify error
+      errors.forEach((error) => {
+        toast.error(error.detail, {
+          position: 'top-right',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: 'colored',
         });
-      } else {
-        // If error.response is undefined or has unexpected structure
-        console.error('An unexpected error occurred:', error);
-        // You can add a general error message/notification here
-      }
+      });
     }
   }
 

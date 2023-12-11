@@ -20,6 +20,10 @@ export default function LoginForm() {
     setData({ ...data, [target.id]: target.value });
   }
 
+  function handleSignUp() {
+    router.push('/auth/register');
+  }
+
   async function handleLogin(e) {
     e.preventDefault();
 
@@ -115,7 +119,11 @@ export default function LoginForm() {
           >
             Login
           </Button>
-          <Button disabled={isLoading} className="flex-1">
+          <Button
+            onClick={handleSignUp}
+            disabled={isLoading}
+            className="flex-1"
+          >
             Register
           </Button>
         </div>

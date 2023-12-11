@@ -1,5 +1,5 @@
 import { Button, Modal } from 'flowbite-react';
-import { baseURL }from '@/routes/paths';
+import { baseURL } from '@/routes/paths';
 import { toast } from 'react-toastify';
 
 export default function ActivityModal({ openModal, setOpenModalIndex, card }) {
@@ -96,17 +96,17 @@ export default function ActivityModal({ openModal, setOpenModalIndex, card }) {
           </Button>
           {card.kategori === 'archive' ? (
             <>
-            <Button onClick={handleUnarchive}>
-              Unarchive
-            </Button>
-            <Button className='absolute right-5' color="failure" onClick={handleDelete}>
-              Delete
-            </Button>
+              <Button onClick={handleUnarchive}>Unarchive</Button>
+              <Button
+                className="absolute right-5"
+                color="failure"
+                onClick={handleDelete}
+              >
+                Delete
+              </Button>
             </>
           ) : (
-            <Button onClick={handleArchive}>
-              Archive
-            </Button>
+            <Button onClick={handleArchive}>Archive</Button>
           )}
         </Modal.Footer>
       </Modal>
