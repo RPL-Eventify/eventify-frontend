@@ -62,7 +62,7 @@ export default function NavbarComponent() {
               <Navbar.Link href="/event/resources" active={isActive('/resources')}>
                 Resources
               </Navbar.Link>
-              <Navbar.Link href="/archive/archived" active={isActive('/archives')}>
+              <Navbar.Link href="/archive/archived" active={isActive('/archive/archived')}>
                 Archives
               </Navbar.Link>
               <Navbar.Link href="/about" active={isActive('/about')}>
