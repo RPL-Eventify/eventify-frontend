@@ -6,7 +6,9 @@ import PATH from '@/routes/paths';
 import useSWR from 'swr';
 import { useAuthContext } from '@/contexts/AuthContext';
 import { useState } from 'react';
-import { Spinner } from 'flowbite-react';
+import { Spinner, Button, Modal } from 'flowbite-react';
+import EventForm from "@/components/elements/EventForm";
+import ActivityForm from '@/components/elements/ActivityForm';
 
 async function fetcher(url, tokens) {
   const eventsFetch = fetch(url[0], {
@@ -49,6 +51,7 @@ async function fetcher(url, tokens) {
 }
 
 export default function Projects() {
+  const [openModal, setOpenModal] = useState(false);
   const { tokens } = useAuthContext();
   const [activeIndex, setActiveIndex] = useState(0);
   const { data, error, isLoading } = useSWR(
@@ -103,10 +106,33 @@ export default function Projects() {
     ) : (
       <ActivityCards cards={data.activites} />
     );
-
+  
+  const addForm = 
+    activeIndex === 0 ? (
+      <div className="flex flex-col items-center mt-8">
+        <Button onClick={() => setOpenModal(true)}>Add Acara</Button>
+          <Modal show={openModal} size='lg' onClose={() => setOpenModal(false)} popup>
+            <Modal.Header />
+            <Modal.Body>
+              <EventForm />
+            </Modal.Body>
+          </Modal>
+      </div>
+    ) : (
+      <div className="flex flex-col items-center mt-8">
+        <Button onClick={() => setOpenModal(true)}>Add Aktivitas</Button>
+          <Modal show={openModal} size='lg' onClose={() => setOpenModal(false)} popup>
+            <Modal.Header />
+            <Modal.Body>
+              <ActivityForm />
+            </Modal.Body>
+          </Modal>
+      </div>
+    );
   return (
     <Layout>
       <TabBar choices={tabChoices} setActiveIndex={setActiveIndex} />
+      {addForm}
       {cards}
     </Layout>
   );
