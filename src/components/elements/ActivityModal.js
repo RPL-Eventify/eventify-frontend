@@ -1,11 +1,36 @@
 import { Button, Modal } from 'flowbite-react';
 import { baseURL } from '@/routes/paths';
 import { toast } from 'react-toastify';
+import { useAuthContext } from '@/contexts/AuthContext';
+import axios from 'axios';
 
-export default function ActivityModal({ openModal, setOpenModalIndex, card }) {
+export default function EventModal({
+  openModal,
+  setOpenModalIndex,
+  card,
+  isArchived,
+}) {
+  const { tokens } = useAuthContext();
   const handleDelete = async () => {
     try {
-      await axios.delete(`${baseURL}/archived/aktivitas/${card.id}/delete`);
+      await axios.delete(
+        `${baseURL}/api/v1/archived/acara/${card.id}/delete/`,
+        {
+          headers: {
+            Authorization: `Bearer ${tokens.access}`,
+          },
+        },
+      );
+      toast.success(`The event ${card.judul} has been successfully deleted.`, {
+        position: 'top-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: 'colored',
+      });
       setOpenModalIndex(-1);
       window.location.reload();
     } catch (error) {
@@ -24,8 +49,28 @@ export default function ActivityModal({ openModal, setOpenModalIndex, card }) {
 
   const handleUnarchive = async () => {
     try {
-      // Add unarchive logic here
-
+      await axios.patch(
+        `${baseURL}/api/v1/acara/${card.id}/unarchive/`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${tokens.access}`,
+          },
+        },
+      );
+      toast.success(
+        `The event ${card.judul} has been successfully restored to the category ${card.kategori}`,
+        {
+          position: 'top-right',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: 'colored',
+        },
+      );
       setOpenModalIndex(-1);
       window.location.reload();
     } catch (error) {
@@ -44,8 +89,25 @@ export default function ActivityModal({ openModal, setOpenModalIndex, card }) {
 
   const handleArchive = async () => {
     try {
-      // Add archive logic here
-
+      await axios.patch(
+        `${baseURL}/api/v1/acara/${card.id}/archive/`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${tokens.access}`,
+          },
+        },
+      );
+      toast.success(`The event ${card.judul} has been successfully archived.`, {
+        position: 'top-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: 'colored',
+      });
       setOpenModalIndex(-1);
       window.location.reload();
     } catch (error) {
@@ -82,19 +144,24 @@ export default function ActivityModal({ openModal, setOpenModalIndex, card }) {
               <p>
                 <span className="font-semibold">Reminder Time:</span>{' '}
                 {card.waktu_pengingat}
+                15:15:00
               </p>
               <p>
-                <span className="font-semibold">Deadline:</span>{' '}
-                {card.tenggat_waktu}
+                <span className="font-semibold">Start Time:</span>{' '}
+                {card.waktu_mulai}
+              </p>
+              <p>
+                <span className="font-semibold">End Time:</span>{' '}
+                {card.waktu_akhir}
               </p>
             </div>
           </div>
         </Modal.Body>
-        <Modal.Footer className="flex">
+        <Modal.Footer>
           <Button color="gray" onClick={() => setOpenModalIndex(-1)}>
             Close
           </Button>
-          {card.kategori === 'archive' ? (
+          {isArchived ? (
             <>
               <Button onClick={handleUnarchive}>Unarchive</Button>
               <Button
