@@ -99,9 +99,9 @@ export default function Areas() {
 
   const cards =
     activeIndex === 0 ? (
-      <EventCards cards={data.events} isArchived={true}/>
+      <EventCards cards={data.events} isArchived={true} />
     ) : (
-      <ActivityCards cards={data.activites} isArchived={true}/>
+      <ActivityCards cards={data.activites} isArchived={true} />
     );
 
   return (

@@ -1,15 +1,37 @@
 import { Button, Modal } from 'flowbite-react';
-import { baseURL }from '@/routes/paths';
+import { baseURL } from '@/routes/paths';
 import { toast } from 'react-toastify';
 
-export default function ActivityModal({ openModal, setOpenModalIndex, card, isArchived }) {
+export default function ActivityModal({
+  openModal,
+  setOpenModalIndex,
+  card,
+  isArchived,
+}) {
   const handleDelete = async () => {
     try {
-      await axios.patch(`${baseURL}/api/v1/aktivitas/${card.id}/unarchive/`, {}, {
-        headers: {
-          Authorization: `Bearer ${tokens.access}`,
+      await axios.patch(
+        `${baseURL}/api/v1/aktivitas/${card.id}/unarchive/`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${tokens.access}`,
+          },
         },
-      });
+      );
+      toast.success(
+        `The activity ${card.judul} has been successfully deleted.`,
+        {
+          position: 'top-right',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: 'colored',
+        },
+      );
       setOpenModalIndex(-1);
       window.location.reload();
     } catch (error) {
@@ -28,11 +50,28 @@ export default function ActivityModal({ openModal, setOpenModalIndex, card, isAr
 
   const handleUnarchive = async () => {
     try {
-      await axios.patch(`${baseURL}/api/v1/aktivitas/${card.id}/unarchive/`, {}, {
-        headers: {
-          Authorization: `Bearer ${tokens.access}`,
+      await axios.patch(
+        `${baseURL}/api/v1/aktivitas/${card.id}/unarchive/`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${tokens.access}`,
+          },
         },
-      });
+      );
+      toast.success(
+        `The activity ${card.judul} has been successfully restored to the category ${card.kategori}`,
+        {
+          position: 'top-right',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: 'colored',
+        },
+      );
       setOpenModalIndex(-1);
       window.location.reload();
     } catch (error) {
@@ -51,11 +90,28 @@ export default function ActivityModal({ openModal, setOpenModalIndex, card, isAr
 
   const handleArchive = async () => {
     try {
-      await axios.patch(`${baseURL}/api/v1/aktivitas/${card.id}/archive/`, {}, {
-        headers: {
-          Authorization: `Bearer ${tokens.access}`,
+      await axios.patch(
+        `${baseURL}/api/v1/aktivitas/${card.id}/archive/`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${tokens.access}`,
+          },
         },
-      });
+      );
+      toast.success(
+        `The activity ${card.judul} has been successfully archived.`,
+        {
+          position: 'top-right',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: 'colored',
+        },
+      );
       setOpenModalIndex(-1);
       window.location.reload();
     } catch (error) {
@@ -106,17 +162,17 @@ export default function ActivityModal({ openModal, setOpenModalIndex, card, isAr
           </Button>
           {isArchived ? (
             <>
-            <Button onClick={handleUnarchive}>
-              Unarchive
-            </Button>
-            <Button className='absolute right-5' color="failure" onClick={handleDelete}>
-              Delete
-            </Button>
+              <Button onClick={handleUnarchive}>Unarchive</Button>
+              <Button
+                className="absolute right-5"
+                color="failure"
+                onClick={handleDelete}
+              >
+                Delete
+              </Button>
             </>
           ) : (
-            <Button onClick={handleArchive}>
-              Archive
-            </Button>
+            <Button onClick={handleArchive}>Archive</Button>
           )}
         </Modal.Footer>
       </Modal>

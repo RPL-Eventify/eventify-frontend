@@ -4,15 +4,36 @@ import { toast } from 'react-toastify';
 import { useAuthContext } from '@/contexts/AuthContext';
 import axios from 'axios';
 
-export default function EventModal({ openModal, setOpenModalIndex, card, isArchived }) {
+export default function EventModal({
+  openModal,
+  setOpenModalIndex,
+  card,
+  isArchived,
+}) {
   const { tokens } = useAuthContext();
   const handleDelete = async () => {
     try {
-      await axios.delete(`${baseURL}/api/v1/archived/acara/${card.id}/delete/`,{
-        headers: {
-          Authorization: `Bearer ${tokens.access}`,
+      await axios.delete(
+        `${baseURL}/api/v1/archived/acara/${card.id}/delete/`,
+        {
+          headers: {
+            Authorization: `Bearer ${tokens.access}`,
+          },
         },
-      });
+      );
+      toast.success(
+        `The event ${card.judul} has been successfully deleted.`,
+        {
+          position: 'top-right',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: 'colored',
+        },
+      );
       setOpenModalIndex(-1);
       window.location.reload();
     } catch (error) {
@@ -31,11 +52,28 @@ export default function EventModal({ openModal, setOpenModalIndex, card, isArchi
 
   const handleUnarchive = async () => {
     try {
-      await axios.patch(`${baseURL}/api/v1/acara/${card.id}/unarchive/`, {}, {
-        headers: {
-          Authorization: `Bearer ${tokens.access}`,
+      await axios.patch(
+        `${baseURL}/api/v1/acara/${card.id}/unarchive/`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${tokens.access}`,
+          },
         },
-      });
+      );
+      toast.success(
+        `The event ${card.judul} has been successfully restored to the category ${card.kategori}`,
+        {
+          position: 'top-right',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: 'colored',
+        },
+      );
       setOpenModalIndex(-1);
       window.location.reload();
     } catch (error) {
@@ -54,11 +92,28 @@ export default function EventModal({ openModal, setOpenModalIndex, card, isArchi
 
   const handleArchive = async () => {
     try {
-      await axios.patch(`${baseURL}/api/v1/acara/${card.id}/archive/`, {}, {
-        headers: {
-          Authorization: `Bearer ${tokens.access}`,
+      await axios.patch(
+        `${baseURL}/api/v1/acara/${card.id}/archive/`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${tokens.access}`,
+          },
         },
-      });
+      );
+      toast.success(
+        `The event ${card.judul} has been successfully archived.`,
+        {
+          position: 'top-right',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: true,
+          draggable: false,
+          progress: undefined,
+          theme: 'colored',
+        },
+      );
       setOpenModalIndex(-1);
       window.location.reload();
     } catch (error) {
@@ -114,17 +169,17 @@ export default function EventModal({ openModal, setOpenModalIndex, card, isArchi
           </Button>
           {isArchived ? (
             <>
-              <Button onClick={handleUnarchive}>
-                Unarchive
-              </Button>
-              <Button className='absolute right-5' color="failure" onClick={handleDelete}>
+              <Button onClick={handleUnarchive}>Unarchive</Button>
+              <Button
+                className="absolute right-5"
+                color="failure"
+                onClick={handleDelete}
+              >
                 Delete
               </Button>
             </>
           ) : (
-            <Button onClick={handleArchive}>
-              Archive
-            </Button>
+            <Button onClick={handleArchive}>Archive</Button>
           )}
         </Modal.Footer>
       </Modal>
