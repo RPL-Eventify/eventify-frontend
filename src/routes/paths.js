@@ -8,6 +8,8 @@ const PATH = {
   projectsAcitivy: `${baseURL}/api/v1/aktivitas/?kategori=projects`,
   projectsEvent: `${baseURL}/api/v1/acara/?kategori=projects`,
   register: `${baseURL}/api/v1/user/register/`,
+  createEvent: `${baseURL}/api/v1/acara/`,
+  createActivity: `${baseURL}/api/v1/aktivitas/`,
 };
 
 export default PATH;
