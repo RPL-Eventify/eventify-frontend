@@ -21,19 +21,16 @@ export default function EventModal({
           },
         },
       );
-      toast.success(
-        `The event ${card.judul} has been successfully deleted.`,
-        {
-          position: 'top-right',
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: false,
-          progress: undefined,
-          theme: 'colored',
-        },
-      );
+      toast.success(`The event ${card.judul} has been successfully deleted.`, {
+        position: 'top-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: 'colored',
+      });
       setOpenModalIndex(-1);
       window.location.reload();
     } catch (error) {
@@ -101,19 +98,16 @@ export default function EventModal({
           },
         },
       );
-      toast.success(
-        `The event ${card.judul} has been successfully archived.`,
-        {
-          position: 'top-right',
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: false,
-          progress: undefined,
-          theme: 'colored',
-        },
-      );
+      toast.success(`The event ${card.judul} has been successfully archived.`, {
+        position: 'top-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: 'colored',
+      });
       setOpenModalIndex(-1);
       window.location.reload();
     } catch (error) {
