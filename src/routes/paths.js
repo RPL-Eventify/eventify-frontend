@@ -14,6 +14,8 @@ const PATH = {
   archivedAcitivy: `${baseURL}/api/v1/archived/aktivitas/`,
   archivedEvent: `${baseURL}/api/v1/archived/acara/`,
   register: `${baseURL}/api/v1/user/register/`,
+  createEvent: `${baseURL}/api/v1/acara/`,
+  createActivity: `${baseURL}/api/v1/aktivitas/`,
 };
 
 export default PATH;

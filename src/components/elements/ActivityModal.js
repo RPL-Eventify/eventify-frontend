@@ -1,37 +1,36 @@
 import { Button, Modal } from 'flowbite-react';
 import { baseURL } from '@/routes/paths';
 import { toast } from 'react-toastify';
+import { useAuthContext } from '@/contexts/AuthContext';
+import axios from 'axios';
 
-export default function ActivityModal({
+export default function EventModal({
   openModal,
   setOpenModalIndex,
   card,
   isArchived,
 }) {
+  const { tokens } = useAuthContext();
   const handleDelete = async () => {
     try {
-      await axios.patch(
-        `${baseURL}/api/v1/aktivitas/${card.id}/unarchive/`,
-        {},
+      await axios.delete(
+        `${baseURL}/api/v1/archived/acara/${card.id}/delete/`,
         {
           headers: {
             Authorization: `Bearer ${tokens.access}`,
           },
         },
       );
-      toast.success(
-        `The activity ${card.judul} has been successfully deleted.`,
-        {
-          position: 'top-right',
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: false,
-          progress: undefined,
-          theme: 'colored',
-        },
-      );
+      toast.success(`The event ${card.judul} has been successfully deleted.`, {
+        position: 'top-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: 'colored',
+      });
       setOpenModalIndex(-1);
       window.location.reload();
     } catch (error) {
@@ -51,7 +50,7 @@ export default function ActivityModal({
   const handleUnarchive = async () => {
     try {
       await axios.patch(
-        `${baseURL}/api/v1/aktivitas/${card.id}/unarchive/`,
+        `${baseURL}/api/v1/acara/${card.id}/unarchive/`,
         {},
         {
           headers: {
@@ -60,7 +59,7 @@ export default function ActivityModal({
         },
       );
       toast.success(
-        `The activity ${card.judul} has been successfully restored to the category ${card.kategori}`,
+        `The event ${card.judul} has been successfully restored to the category ${card.kategori}`,
         {
           position: 'top-right',
           autoClose: 2000,
@@ -91,7 +90,7 @@ export default function ActivityModal({
   const handleArchive = async () => {
     try {
       await axios.patch(
-        `${baseURL}/api/v1/aktivitas/${card.id}/archive/`,
+        `${baseURL}/api/v1/acara/${card.id}/archive/`,
         {},
         {
           headers: {
@@ -99,19 +98,16 @@ export default function ActivityModal({
           },
         },
       );
-      toast.success(
-        `The activity ${card.judul} has been successfully archived.`,
-        {
-          position: 'top-right',
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: false,
-          pauseOnHover: true,
-          draggable: false,
-          progress: undefined,
-          theme: 'colored',
-        },
-      );
+      toast.success(`The event ${card.judul} has been successfully archived.`, {
+        position: 'top-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: 'colored',
+      });
       setOpenModalIndex(-1);
       window.location.reload();
     } catch (error) {
@@ -148,15 +144,20 @@ export default function ActivityModal({
               <p>
                 <span className="font-semibold">Reminder Time:</span>{' '}
                 {card.waktu_pengingat}
+                15:15:00
               </p>
               <p>
-                <span className="font-semibold">Deadline:</span>{' '}
-                {card.tenggat_waktu}
+                <span className="font-semibold">Start Time:</span>{' '}
+                {card.waktu_mulai}
+              </p>
+              <p>
+                <span className="font-semibold">End Time:</span>{' '}
+                {card.waktu_akhir}
               </p>
             </div>
           </div>
         </Modal.Body>
-        <Modal.Footer className="flex">
+        <Modal.Footer>
           <Button color="gray" onClick={() => setOpenModalIndex(-1)}>
             Close
           </Button>
