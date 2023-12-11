@@ -4,7 +4,7 @@ import LoginForm from '@/components/auth/LoginForm';
 export default function Login() {
   return (
     <Layout>
-      <div className="flex flex-1 content-center justify-center">
+      <div className="flex h-screen items-center justify-center">
         <LoginForm />
       </div>
     </Layout>
