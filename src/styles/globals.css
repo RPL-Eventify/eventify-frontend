@@ -3,9 +3,16 @@
 @tailwind utilities;
 
 /* For Debugging */
-/* * {
-    border: 1px solid red;
-} */
+* {
+  border: 1px solid red;
+}
+
+html,
+body,
+body > div:first-child,
+div#__next {
+  height: 100%;
+}
 
 @media (min-width: 320px) {
   h1 {

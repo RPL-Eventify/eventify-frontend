@@ -14,7 +14,7 @@ export default function AuthGuard({ children }) {
 
   // show loading indicator while the auth provider is still initializing
   if (loading) {
-    return <h1>Application Loading</h1>;
+    return <div className="h-full animate-pulse bg-slate-400"></div>;
   }
 
   // if auth initialized with a valid user show protected page
