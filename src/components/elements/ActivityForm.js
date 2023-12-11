@@ -97,7 +97,7 @@ const ActivityForm = () => {
     <>
     <ToastContainer />
     <form className="flex max-w-md flex-col gap-4" onSubmit={(e) => {handleSubmit(e)}}>
-      <h1 className="text-x text-center text-xl font-bold">Add Event  </h1>
+      <h1 className="text-x text-center text-xl font-bold">Add Activity  </h1>
       <div>
         <div className="mb-2 block">
           <Label htmlFor="base" value="Judul" />
@@ -121,7 +121,6 @@ const ActivityForm = () => {
           className="w-full"
           onChange={(e) => onFormChange(e.target)}
           disabled={isLoading}
-          required
           placeholder="Deskripsi"
         />
       </div>
@@ -135,7 +134,6 @@ const ActivityForm = () => {
           className="w-full"
           onChange={(e) => onFormChange(e.target)}
           disabled={isLoading}
-          required
         />
       </div>
       <div>
@@ -150,7 +148,6 @@ const ActivityForm = () => {
           max="2030-06-07T00:00" 
           onChange={(e) => onFormChange(e.target)}
           disabled={isLoading}
-          required
         />
       </div>
       <div>
@@ -165,7 +162,6 @@ const ActivityForm = () => {
           max="2030-06-07T00:00" 
           onChange={(e) => onFormChange(e.target)}
           disabled={isLoading}
-          required
         />
       </div>
       <Button type="submit" disabled={isLoading} isProcessing={isLoading}>Add</Button>
