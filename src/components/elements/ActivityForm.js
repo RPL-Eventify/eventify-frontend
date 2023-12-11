@@ -92,16 +92,31 @@ const ActivityForm = () => {
 
   return (
     <>
-    <ToastContainer />
-    <form className="flex max-w-md flex-col gap-4" onSubmit={(e) => {handleSubmit(e)}}>
-      <h1 className="text-x text-center text-xl font-bold">Add Activity  </h1>
-      <div>
-        <div className="mb-2 block">
-          <Label htmlFor="base" value="Judul" />
-        </div>
+      <ToastContainer />
+      <form
+        className="flex max-w-md flex-col gap-4"
+        onSubmit={(e) => {
+          handleSubmit(e);
+        }}
+      >
+        <h1 className="text-x text-center text-xl font-bold">Add Activity </h1>
         <div>
           <div className="mb-2 block">
-            <Label htmlFor="comment" value="Deskripsi" />
+            <Label htmlFor="base" value="Judul" />
+          </div>
+          <div>
+            <div className="mb-2 block">
+              <Label htmlFor="comment" value="Deskripsi" />
+            </div>
+            <Textarea
+              type="comment"
+              id="deskripsi"
+              className="w-full"
+              onChange={(e) => onFormChange(e.target)}
+              disabled={isLoading}
+              required
+              placeholder="Deskripsi"
+            />
           </div>
           <Textarea
             type="comment"
@@ -109,61 +124,53 @@ const ActivityForm = () => {
             className="w-full"
             onChange={(e) => onFormChange(e.target)}
             disabled={isLoading}
-            required
             placeholder="Deskripsi"
           />
         </div>
-        <Textarea
-          type="comment"
-          id="deskripsi"
-          className="w-full"
-          onChange={(e) => onFormChange(e.target)}
-          disabled={isLoading}
-          placeholder="Deskripsi"
-        />
-      </div>
-      <div>
-        <div className="mb-2 block">
-          <Label htmlFor="base" value="Lokasi" />
+        <div>
+          <div className="mb-2 block">
+            <Label htmlFor="base" value="Lokasi" />
+          </div>
+          <TextInput
+            type="base"
+            id="lokasi"
+            className="w-full"
+            onChange={(e) => onFormChange(e.target)}
+            disabled={isLoading}
+          />
         </div>
-        <TextInput
-          type="base"
-          id="lokasi"
-          className="w-full"
-          onChange={(e) => onFormChange(e.target)}
-          disabled={isLoading}
-        />
-      </div>
-      <div>
-        <div className="mb-2 block">
-          <Label value="Tenggat Waktu" />
+        <div>
+          <div className="mb-2 block">
+            <Label value="Tenggat Waktu" />
+          </div>
+          <input
+            type="datetime-local"
+            id="tenggat_waktu"
+            name="tenggat_waktu"
+            min="2015-06-07T00:00"
+            max="2030-06-07T00:00"
+            onChange={(e) => onFormChange(e.target)}
+            disabled={isLoading}
+          />
         </div>
-        <input
-          type="datetime-local"
-          id="tenggat_waktu"
-          name="tenggat_waktu"
-          min="2015-06-07T00:00"
-          max="2030-06-07T00:00" 
-          onChange={(e) => onFormChange(e.target)}
-          disabled={isLoading}
-        />
-      </div>
-      <div>
-        <div className="mb-2 block">
-          <Label value="Waktu Pengingat" />
+        <div>
+          <div className="mb-2 block">
+            <Label value="Waktu Pengingat" />
+          </div>
+          <input
+            type="datetime-local"
+            id="waktu_pengingat"
+            name="waktu_pengingat"
+            min="2015-06-07T00:00"
+            max="2030-06-07T00:00"
+            onChange={(e) => onFormChange(e.target)}
+            disabled={isLoading}
+          />
         </div>
-        <input
-          type="datetime-local"
-          id="waktu_pengingat"
-          name="waktu_pengingat"
-          min="2015-06-07T00:00"
-          max="2030-06-07T00:00" 
-          onChange={(e) => onFormChange(e.target)}
-          disabled={isLoading}
-        />
-      </div>
-      <Button type="submit" disabled={isLoading} isProcessing={isLoading}>Add</Button>
-    </form>
+        <Button type="submit" disabled={isLoading} isProcessing={isLoading}>
+          Add
+        </Button>
+      </form>
     </>
   );
 };
