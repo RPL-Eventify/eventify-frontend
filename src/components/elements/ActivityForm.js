@@ -48,8 +48,8 @@ const ActivityForm = () => {
     setLoading(true);
 
     try {
-      console.log(eventData);
-      const response = await axios.post(PATH.createActivity, eventData, {
+
+      const response = await axios.post(PATH.createActivity, activityData, {
         headers: {
           Authorization: `Bearer ${tokens?.access}`,
         },
