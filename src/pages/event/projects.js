@@ -6,6 +6,7 @@ import PATH from '@/routes/paths';
 import useSWR from 'swr';
 import { useAuthContext } from '@/contexts/AuthContext';
 import { useState } from 'react';
+import { Spinner } from 'flowbite-react';
 
 async function fetcher(url, tokens) {
   const eventsFetch = fetch(url[0], {
@@ -21,6 +22,20 @@ async function fetcher(url, tokens) {
     eventsFetch,
     activitesFetch,
   ]);
+
+  if (!eventsResponse.ok) {
+    const error = new Error('An error occurred while fetching the data.');
+    error.info = await res.json();
+    error.status = res.status;
+    throw error;
+  }
+
+  if (!activitesResponse.ok) {
+    const error = new Error('An error occurred while fetching the data.');
+    error.info = await res.json();
+    error.status = res.status;
+    throw error;
+  }
 
   const [events, activites] = await Promise.all([
     eventsResponse.json(),
@@ -58,7 +73,9 @@ export default function Projects() {
     return (
       <Layout>
         <TabBar choices={tabChoices} setActiveIndex={setActiveIndex} />
-        Error
+        <div className="flex h-full items-center justify-center">
+          Error has occured. Please refresh the page!
+        </div>
       </Layout>
     );
   }
@@ -66,7 +83,16 @@ export default function Projects() {
     return (
       <Layout>
         <TabBar choices={tabChoices} setActiveIndex={setActiveIndex} />
-        Loading...
+        <div className="m-2 grid auto-rows-[200px] grid-cols-[repeat(auto-fill,minmax(250px,1fr))] grid-rows-[200px] gap-6 p-4">
+          {[...Array(5)].map((_, id) => (
+            <div
+              key={id}
+              className="flex items-center justify-center rounded-xl bg-slate-200"
+            >
+              <Spinner />
+            </div>
+          ))}
+        </div>
       </Layout>
     );
   }

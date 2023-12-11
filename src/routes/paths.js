@@ -5,8 +5,8 @@ const PATH = {
   logout: `${baseURL}/api/v1/user/logout/`,
   currentUser: `${baseURL}/api/v1/user/`,
   refreshToken: `${baseURL}/api/v1/token/refresh/`,
-  projectsEvent: `${baseURL}/api/v1/aktivitas/?kategori=projects`,
-  projectsAcitivy: `${baseURL}/api/v1/acara/?kategori=projects`,
+  projectsAcitivy: `${baseURL}/api/v1/aktivitas/?kategori=projects`,
+  projectsEvent: `${baseURL}/api/v1/acara/?kategori=projects`,
 };
 
 export default PATH;
