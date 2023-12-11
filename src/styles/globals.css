@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 /* For Debugging */
-* {
+/* * {
   border: 1px solid red;
-}
+} */
 
 html,
 body,
