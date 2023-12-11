@@ -83,7 +83,7 @@ export default function RegisterForm() {
   return (
     <>
       <ToastContainer />
-      <form className="flex h-full max-h-screen w-full max-w-screen-sm flex-col justify-around gap-5 rounded-xl p-4">
+      <form className="m-4 flex h-full max-h-screen w-full max-w-screen-sm flex-col justify-around gap-5 rounded-xl rounded-r-xl border border-cyan-600 p-4 shadow-md">
         <h1 className="text-x text-center text-xl font-bold">
           Register Account
         </h1>
