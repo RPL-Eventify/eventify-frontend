@@ -1,6 +1,80 @@
 import { Button, Modal } from 'flowbite-react';
+import { baseURL } from '@/routes/paths';
+import { toast } from 'react-toastify';
+import { useAuthContext } from '@/contexts/AuthContext';
+import axios from 'axios';
 
-export default function EventModal({ openModal, setOpenModalIndex, card }) {
+export default function EventModal({ openModal, setOpenModalIndex, card, isArchived }) {
+  const { tokens } = useAuthContext();
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`${baseURL}/api/v1/archived/acara/${card.id}/delete/`,{
+        headers: {
+          Authorization: `Bearer ${tokens.access}`,
+        },
+      });
+      setOpenModalIndex(-1);
+      window.location.reload();
+    } catch (error) {
+      toast.error(error.detail, {
+        position: 'top-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: 'colored',
+      });
+    }
+  };
+
+  const handleUnarchive = async () => {
+    try {
+      await axios.patch(`${baseURL}/api/v1/acara/${card.id}/unarchive/`, {}, {
+        headers: {
+          Authorization: `Bearer ${tokens.access}`,
+        },
+      });
+      setOpenModalIndex(-1);
+      window.location.reload();
+    } catch (error) {
+      toast.error(error.detail, {
+        position: 'top-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: 'colored',
+      });
+    }
+  };
+
+  const handleArchive = async () => {
+    try {
+      await axios.patch(`${baseURL}/api/v1/acara/${card.id}/archive/`, {}, {
+        headers: {
+          Authorization: `Bearer ${tokens.access}`,
+        },
+      });
+      setOpenModalIndex(-1);
+      window.location.reload();
+    } catch (error) {
+      toast.error(error.detail, {
+        position: 'top-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: false,
+        progress: undefined,
+        theme: 'colored',
+      });
+    }
+  };
+
   return (
     <>
       <Modal dismissible show={openModal} onClose={() => setOpenModalIndex(-1)}>
@@ -38,6 +112,20 @@ export default function EventModal({ openModal, setOpenModalIndex, card }) {
           <Button color="gray" onClick={() => setOpenModalIndex(-1)}>
             Close
           </Button>
+          {isArchived ? (
+            <>
+              <Button onClick={handleUnarchive}>
+                Unarchive
+              </Button>
+              <Button className='absolute right-5' color="failure" onClick={handleDelete}>
+                Delete
+              </Button>
+            </>
+          ) : (
+            <Button onClick={handleArchive}>
+              Archive
+            </Button>
+          )}
         </Modal.Footer>
       </Modal>
     </>

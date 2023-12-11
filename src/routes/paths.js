@@ -7,7 +7,14 @@ const PATH = {
   refreshToken: `${baseURL}/api/v1/token/refresh/`,
   projectsAcitivy: `${baseURL}/api/v1/aktivitas/?kategori=projects`,
   projectsEvent: `${baseURL}/api/v1/acara/?kategori=projects`,
+  areasAcitivy: `${baseURL}/api/v1/aktivitas/?kategori=areas`,
+  areasEvent: `${baseURL}/api/v1/acara/?kategori=areas`,
+  resourcesAcitivy: `${baseURL}/api/v1/aktivitas/?kategori=resources`,
+  resourcesEvent: `${baseURL}/api/v1/acara/?kategori=resources`,
+  archivedAcitivy: `${baseURL}/api/v1/archived/aktivitas/`,
+  archivedEvent: `${baseURL}/api/v1/archived/acara/`,
   register: `${baseURL}/api/v1/user/register/`,
 };
 
 export default PATH;
+export { baseURL };

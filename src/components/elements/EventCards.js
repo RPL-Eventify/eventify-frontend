@@ -3,7 +3,7 @@ import EventModal from '@/components/elements/EventModal';
 import { useState } from 'react';
 import { Fragment } from 'react';
 
-export default function EventCards({ cards }) {
+export default function EventCards({ cards , isArchived}) {
   const [openModalIndex, setOpenModalIndex] = useState(-1);
 
   return (
@@ -19,6 +19,7 @@ export default function EventCards({ cards }) {
             openModal={openModalIndex === index}
             setOpenModalIndex={setOpenModalIndex}
             card={card}
+            isArchived={isArchived}
           />
         </Fragment>
       ))}
