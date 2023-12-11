@@ -7,7 +7,7 @@ import useSWR from 'swr';
 import { useAuthContext } from '@/contexts/AuthContext';
 import { useState } from 'react';
 import { Spinner, Button, Modal } from 'flowbite-react';
-import EventForm from "@/components/elements/EventForm";
+import EventForm from '@/components/elements/EventForm';
 import ActivityForm from '@/components/elements/ActivityForm';
 
 async function fetcher(url, tokens) {
@@ -106,27 +106,37 @@ export default function Projects() {
     ) : (
       <ActivityCards cards={data.activites} />
     );
-  
-  const addForm = 
+
+  const addForm =
     activeIndex === 0 ? (
-      <div className="flex flex-col items-center mt-8">
+      <div className="mt-8 flex flex-col items-center">
         <Button onClick={() => setOpenModal(true)}>Add Acara</Button>
-          <Modal show={openModal} size='lg' onClose={() => setOpenModal(false)} popup>
-            <Modal.Header />
-            <Modal.Body>
-              <EventForm />
-            </Modal.Body>
-          </Modal>
+        <Modal
+          show={openModal}
+          size="lg"
+          onClose={() => setOpenModal(false)}
+          popup
+        >
+          <Modal.Header />
+          <Modal.Body>
+            <EventForm />
+          </Modal.Body>
+        </Modal>
       </div>
     ) : (
-      <div className="flex flex-col items-center mt-8">
+      <div className="mt-8 flex flex-col items-center">
         <Button onClick={() => setOpenModal(true)}>Add Aktivitas</Button>
-          <Modal show={openModal} size='lg' onClose={() => setOpenModal(false)} popup>
-            <Modal.Header />
-            <Modal.Body>
-              <ActivityForm />
-            </Modal.Body>
-          </Modal>
+        <Modal
+          show={openModal}
+          size="lg"
+          onClose={() => setOpenModal(false)}
+          popup
+        >
+          <Modal.Header />
+          <Modal.Body>
+            <ActivityForm />
+          </Modal.Body>
+        </Modal>
       </div>
     );
   return (
