@@ -14,7 +14,7 @@ export default function EventModal({
   const handleDelete = async () => {
     try {
       await axios.delete(
-        `${baseURL}/api/v1/archived/acara/${card.id}/delete/`,
+        `${baseURL}/api/v1/archived/aktivitas/${card.id}/delete/`,
         {
           headers: {
             Authorization: `Bearer ${tokens.access}`,
@@ -50,7 +50,7 @@ export default function EventModal({
   const handleUnarchive = async () => {
     try {
       await axios.patch(
-        `${baseURL}/api/v1/acara/${card.id}/unarchive/`,
+        `${baseURL}/api/v1/aktivitas/${card.id}/unarchive/`,
         {},
         {
           headers: {
@@ -90,7 +90,7 @@ export default function EventModal({
   const handleArchive = async () => {
     try {
       await axios.patch(
-        `${baseURL}/api/v1/acara/${card.id}/archive/`,
+        `${baseURL}/api/v1/aktivitas/${card.id}/archive/`,
         {},
         {
           headers: {
@@ -147,12 +147,8 @@ export default function EventModal({
                 15:15:00
               </p>
               <p>
-                <span className="font-semibold">Start Time:</span>{' '}
-                {card.waktu_mulai}
-              </p>
-              <p>
-                <span className="font-semibold">End Time:</span>{' '}
-                {card.waktu_akhir}
+                <span className="font-semibold">Deadline:</span>{' '}
+                {card.tenggat_waktu}
               </p>
             </div>
           </div>

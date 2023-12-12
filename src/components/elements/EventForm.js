@@ -17,7 +17,7 @@ const EventForm = () => {
     judul: '',
     deskripsi: '',
     lokasi: '',
-    waktu_pengingat: '',
+    waktu_pengingat: null,
     waktu_mulai: '',
     waktu_akhir: '',
   });

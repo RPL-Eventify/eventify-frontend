@@ -17,11 +17,11 @@ const ActivityForm = () => {
     judul: '',
     deskripsi: '',
     lokasi: '',
-    waktu_pengingat: '',
-    tenggat_waktu: '',
+    waktu_pengingat: null,
+    tenggat_waktu: null,
   });
   const [isLoading, setLoading] = useState(false);
-
+  
   function onFormChange(target) {
     let formattedValue = target.value;
 
